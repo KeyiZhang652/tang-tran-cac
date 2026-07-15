@@ -49,6 +49,7 @@
   ::selection{background:var(--brass);color:var(--ink)}
   img{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
+  [hidden]{display:none!important}
 
   .display{font-family:var(--serif);font-weight:600;letter-spacing:.01em}
   html[data-lang="zh"] .display{font-family:"Songti SC","STSong","SimSun","Noto Serif SC",serif}
@@ -337,6 +338,79 @@
     box-shadow:0 2px 16px rgba(166,58,43,.4);
   }
 
+  /* ---------------- category photo rails ---------------- */
+  .rail-wrap{position:relative;margin-top:26px}
+  .rail{
+    display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .rail::-webkit-scrollbar{display:none}
+  .rail-item{
+    flex:0 0 66%;max-width:340px;aspect-ratio:4/3;margin:0;
+    scroll-snap-align:start;overflow:hidden;position:relative;
+    border:1px solid var(--hairline);background:var(--ink-2);cursor:zoom-in;
+  }
+  .rail-item img{
+    width:100%;height:100%;object-fit:cover;
+    filter:sepia(.12);transition:transform .6s cubic-bezier(.2,.6,.2,1),filter .4s;
+  }
+  .rail-item:hover img{transform:scale(1.05);filter:sepia(0)}
+  .rail-dots{display:flex;gap:6px;justify-content:center;margin-top:14px}
+  .rail-dot{width:5px;height:5px;border-radius:50%;background:rgba(201,162,92,.25);transition:background .3s,transform .3s}
+  .rail-dot.on{background:var(--brass);transform:scale(1.25)}
+  .rail-btn{
+    position:absolute;top:calc(50% - 22px);transform:translateY(-50%);z-index:3;
+    width:38px;height:38px;border-radius:50%;cursor:pointer;
+    border:1px solid var(--hairline);background:rgba(23,16,9,.85);color:var(--brass);
+    font-size:20px;line-height:1;display:grid;place-items:center;padding:0 0 3px;
+    opacity:0;transition:opacity .3s,color .3s,border-color .3s;
+  }
+  .rail-wrap:hover .rail-btn{opacity:1}
+  .rail-btn:hover{color:var(--brass-bright);border-color:rgba(201,162,92,.6)}
+  .rail-btn.prev{left:6px}
+  .rail-btn.next{right:6px}
+  @media (hover:none){.rail-btn{display:none}}
+
+  /* ---------------- lightbox ---------------- */
+  .lb{
+    position:fixed;inset:0;z-index:1300;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:rgba(13,9,5,.94);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    opacity:0;transition:opacity .3s;
+    padding:60px 16px calc(28px + env(safe-area-inset-bottom));
+  }
+  .lb.open{opacity:1}
+  .lb-stage{max-width:min(1100px,94vw);max-height:74vh;display:grid;place-items:center;margin:0}
+  .lb-stage img{
+    max-width:100%;max-height:74vh;object-fit:contain;
+    border:1px solid var(--hairline);box-shadow:0 30px 80px rgba(0,0,0,.6);
+    transform:scale(.97);transition:transform .35s;
+  }
+  .lb.open .lb-stage img{transform:scale(1)}
+  .lb-meta{margin-top:22px;display:flex;align-items:baseline;gap:18px}
+  .lb-cap{font-family:var(--serif);font-size:19px;color:var(--parchment)}
+  html[data-lang="zh"] .lb-cap{font-family:"Songti SC","STSong","SimSun",serif}
+  .lb-count{font-size:11px;letter-spacing:.3em;color:var(--brass)}
+  .lb-x{
+    position:absolute;top:calc(16px + env(safe-area-inset-top));right:16px;
+    width:44px;height:44px;border-radius:50%;cursor:pointer;
+    background:none;border:1px solid var(--hairline);color:var(--parchment-dim);
+    font-size:17px;display:grid;place-items:center;transition:color .3s,border-color .3s;
+  }
+  .lb-x:hover{color:var(--brass-bright);border-color:rgba(201,162,92,.6)}
+  .lb-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:46px;height:46px;border-radius:50%;cursor:pointer;
+    background:rgba(23,16,9,.6);border:1px solid var(--hairline);color:var(--brass);
+    font-size:24px;line-height:1;display:grid;place-items:center;padding:0 0 3px;
+    transition:background .3s,color .3s;
+  }
+  .lb-nav:hover{color:var(--ink);background:var(--brass)}
+  .lb-prev{left:18px}
+  .lb-next{right:18px}
+  @media (max-width:640px){.lb-nav{display:none}}
+
   /* ---------------- feature chapters (scroll-driven) ---------------- */
   .chapter{height:220vh;position:relative}
   .ch-sticky{position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden;display:flex;align-items:flex-end}
@@ -593,6 +667,10 @@
           <h3 data-i18n="c1.name"></h3>
           <p data-i18n="c1.desc"></p>
           <span class="meta" data-i18n="c1.meta"></span>
+          <div class="rail-wrap" hidden>
+            <div class="rail" data-cat="clocks" data-name="c1.name"></div>
+            <div class="rail-dots" aria-hidden="true"></div>
+          </div>
         </article>
 
         <article class="cat reveal d1">
@@ -611,6 +689,10 @@
           <h3 data-i18n="c2.name"></h3>
           <p data-i18n="c2.desc"></p>
           <span class="meta" data-i18n="c2.meta"></span>
+          <div class="rail-wrap" hidden>
+            <div class="rail" data-cat="pendulum" data-name="c2.name"></div>
+            <div class="rail-dots" aria-hidden="true"></div>
+          </div>
         </article>
 
         <article class="cat reveal">
@@ -632,6 +714,10 @@
           <h3 data-i18n="c3.name"></h3>
           <p data-i18n="c3.desc"></p>
           <span class="meta" data-i18n="c3.meta"></span>
+          <div class="rail-wrap" hidden>
+            <div class="rail" data-cat="moto" data-name="c3.name"></div>
+            <div class="rail-dots" aria-hidden="true"></div>
+          </div>
         </article>
 
         <article class="cat reveal d1">
@@ -653,6 +739,10 @@
           <h3 data-i18n="c4.name"></h3>
           <p data-i18n="c4.desc"></p>
           <span class="meta" data-i18n="c4.meta"></span>
+          <div class="rail-wrap" hidden>
+            <div class="rail" data-cat="bike" data-name="c4.name"></div>
+            <div class="rail-dots" aria-hidden="true"></div>
+          </div>
         </article>
 
         <article class="cat reveal">
@@ -666,6 +756,10 @@
           <h3 data-i18n="c5.name"></h3>
           <p data-i18n="c5.desc"></p>
           <span class="meta" data-i18n="c5.meta"></span>
+          <div class="rail-wrap" hidden>
+            <div class="rail" data-cat="jar" data-name="c5.name"></div>
+            <div class="rail-dots" aria-hidden="true"></div>
+          </div>
         </article>
 
         <article class="cat reveal d1">
@@ -683,6 +777,10 @@
           <h3 data-i18n="c6.name"></h3>
           <p data-i18n="c6.desc"></p>
           <span class="meta" data-i18n="c6.meta"></span>
+          <div class="rail-wrap" hidden>
+            <div class="rail" data-cat="wood" data-name="c6.name"></div>
+            <div class="rail-dots" aria-hidden="true"></div>
+          </div>
         </article>
 
       </div>
@@ -912,6 +1010,15 @@
   <div data-i18n="foot"></div>
 </footer>
 
+<!-- Lightbox / 全屏看图 -->
+<div class="lb" id="lb" hidden>
+  <button class="lb-x" type="button">✕</button>
+  <button class="lb-nav lb-prev" type="button">‹</button>
+  <button class="lb-nav lb-next" type="button">›</button>
+  <figure class="lb-stage"><img id="lbImg" alt=""></figure>
+  <div class="lb-meta"><span class="lb-cap"></span><span class="lb-count"></span></div>
+</div>
+
 <!-- Nhạc nền / 背景音乐: Chopin — Nocturne in G major, Op. 37 No. 2
      Performer: Olga Gurevich · Source: Musopen (musopen.org) · License: CC0 / Public Domain -->
 <audio id="bgm" loop preload="none" src="music/nocturne.mp3"></audio>
@@ -930,6 +1037,7 @@ const I18N = {
     "meta.title":"Tàng Trân Các 藏珍阁 — Bộ sưu tập tư nhân",
     "meta.desc":"Bộ sưu tập tư nhân tại Việt Nam: đồng hồ cổ, đồng hồ quả lắc ODO, xe máy cổ, xe đạp Peugeot, chum vại cổ và đồ gỗ quý.",
     "music.mute":"Tắt nhạc nền","music.play":"Mở nhạc nền",
+    "lb.close":"Đóng","lb.prev":"Ảnh trước","lb.next":"Ảnh sau",
     "ch1.kicker":"Chương I — Đồng hồ quả lắc ODO",
     "ch1.title":"Mỗi giờ, ngôi nhà lại thở",
     "ch1.text":"Bộ máy Pháp gần trăm năm tuổi, tiếng chuông Westminster trầm ấm. Lên dây cót mỗi tuần một lần — như một nghi thức nhỏ của gia đình.",
@@ -1005,6 +1113,7 @@ const I18N = {
     "meta.title":"藏珍阁 Tàng Trân Các — 私人收藏",
     "meta.desc":"越南私人收藏：古董钟表、ODO 摆钟、老式摩托车、Peugeot 自行车、老水缸与红木家具。",
     "music.mute":"关闭背景音乐","music.play":"播放背景音乐",
+    "lb.close":"关闭","lb.prev":"上一张","lb.next":"下一张",
     "ch1.kicker":"第一章 — ODO 摆钟",
     "ch1.title":"每到整点，老宅呼吸一次",
     "ch1.text":"近百年的法国机芯，西敏寺钟声温润低回。每周上一次发条——是这个家小小的仪式。",
@@ -1080,6 +1189,7 @@ const I18N = {
     "meta.title":"Tàng Trân Các 藏珍阁 — A Private Collection",
     "meta.desc":"A private collection in Vietnam: antique clocks, ODO pendulum clocks, vintage motorcycles, Peugeot bicycles, antique water jars, and precious rosewood furniture.",
     "music.mute":"Mute background music","music.play":"Play background music",
+    "lb.close":"Close","lb.prev":"Previous photo","lb.next":"Next photo",
     "ch1.kicker":"Chapter I — The ODO Pendulum Clock",
     "ch1.title":"On the hour, the house breathes",
     "ch1.text":"A French movement nearly a century old, its Westminster chime warm and low. Wound once a week — a small family ritual.",
@@ -1155,6 +1265,7 @@ const I18N = {
     "meta.title":"Tàng Trân Các 藏珍阁 — Collection privée",
     "meta.desc":"Collection privée au Vietnam : horloges anciennes, pendules ODO, motos d'époque, bicyclettes Peugeot, jarres anciennes et mobilier en bois précieux.",
     "music.mute":"Couper la musique","music.play":"Activer la musique",
+    "lb.close":"Fermer","lb.prev":"Photo précédente","lb.next":"Photo suivante",
     "ch1.kicker":"Chapitre I — L'horloge ODO",
     "ch1.title":"À chaque heure, la maison respire",
     "ch1.text":"Un mouvement français presque centenaire, au carillon Westminster chaud et grave. Remonté une fois par semaine — un petit rituel familial.",
@@ -1252,7 +1363,21 @@ function setLang(l){
     b.setAttribute("aria-pressed", String(on));
   });
   updateMusicUI();
+  refreshGalleryAria();
   try{ localStorage.setItem("ttc-lang", l); }catch(e){}
+}
+
+function refreshGalleryAria(){
+  const d = I18N[curLang] || I18N.vi;
+  const lbEl = document.getElementById("lb");
+  if(lbEl){
+    lbEl.querySelector(".lb-x").setAttribute("aria-label", d["lb.close"] || "");
+    lbEl.querySelector(".lb-prev").setAttribute("aria-label", d["lb.prev"] || "");
+    lbEl.querySelector(".lb-next").setAttribute("aria-label", d["lb.next"] || "");
+  }
+  document.querySelectorAll(".rail-btn").forEach(b=>{
+    b.setAttribute("aria-label", d[b.dataset.lbKey] || "");
+  });
 }
 
 function detectLang(){
@@ -1399,6 +1524,163 @@ const numIO = new IntersectionObserver(entries=>{
   });
 },{threshold:.6});
 document.querySelectorAll(".num-n").forEach(el=>numIO.observe(el));
+
+/* ---- category photo rails: drop numbered photos into photos/<cat>/ and they appear ---- */
+const RAIL_CATS = [
+  {key:"clocks", name:"c1.name"},
+  {key:"pendulum", name:"c2.name"},
+  {key:"moto", name:"c3.name"},
+  {key:"bike", name:"c4.name"},
+  {key:"jar", name:"c5.name"},
+  {key:"wood", name:"c6.name"}
+];
+const RAIL_MAX = 12, RAIL_EXTS = ["jpg","JPG","jpeg","png","webp"];
+const railPhotos = {};
+
+function probeImg(url){
+  return new Promise(res=>{
+    const im = new Image();
+    im.onload = ()=>res(true);
+    im.onerror = ()=>res(false);
+    im.src = url;
+  });
+}
+async function discoverCat(cat){
+  const urls = [];
+  for(let i = 1; i <= RAIL_MAX; i++){
+    let hit = null;
+    for(const ext of RAIL_EXTS){
+      const u = "photos/" + cat.key + "/" + i + "." + ext;
+      if(await probeImg(u)){ hit = u; break; }
+    }
+    if(!hit) break;
+    urls.push(hit);
+  }
+  return urls;
+}
+function catLabel(nameKey){
+  const d = I18N[curLang] || I18N.vi;
+  return d[nameKey] || "";
+}
+function buildRail(cat){
+  const rail = document.querySelector('.rail[data-cat="' + cat.key + '"]');
+  if(!rail || rail.childElementCount) return;
+  const urls = railPhotos[cat.key];
+  const wrap = rail.closest(".rail-wrap");
+  const dots = wrap.querySelector(".rail-dots");
+  urls.forEach((u, i)=>{
+    const fig = document.createElement("figure");
+    fig.className = "rail-item";
+    const img = document.createElement("img");
+    img.loading = "lazy"; img.decoding = "async";
+    img.src = u; img.alt = catLabel(cat.name) + " " + (i + 1);
+    fig.appendChild(img);
+    fig.addEventListener("click", ()=>openLb(cat, i));
+    rail.appendChild(fig);
+    const dot = document.createElement("span");
+    dot.className = "rail-dot" + (i === 0 ? " on" : "");
+    dots.appendChild(dot);
+  });
+  const mkBtn = (cls, dir, key)=>{
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "rail-btn " + cls;
+    b.textContent = dir < 0 ? "‹" : "›";
+    b.dataset.lbKey = key;
+    b.addEventListener("click", ()=>{
+      const it = rail.querySelector(".rail-item");
+      rail.scrollBy({left: dir * (it ? it.getBoundingClientRect().width + 10 : 260), behavior:"smooth"});
+    });
+    wrap.appendChild(b);
+  };
+  mkBtn("prev", -1, "lb.prev");
+  mkBtn("next", 1, "lb.next");
+  rail.addEventListener("scroll", ()=>{
+    const it = rail.querySelector(".rail-item");
+    if(!it) return;
+    const iw = it.getBoundingClientRect().width + 10;
+    const idx = Math.max(0, Math.min(urls.length - 1, Math.round(rail.scrollLeft / iw)));
+    dots.querySelectorAll(".rail-dot").forEach((d, j)=>d.classList.toggle("on", j === idx));
+  }, {passive:true});
+  wrap.hidden = false;
+  refreshGalleryAria();
+}
+let railsStarted = false;
+function startRailDiscovery(){
+  if(railsStarted) return;
+  railsStarted = true;
+  RAIL_CATS.forEach(cat=>{
+    discoverCat(cat).then(urls=>{
+      if(urls.length){ railPhotos[cat.key] = urls; buildRail(cat); }
+    });
+  });
+}
+const railIO = new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    railIO.unobserve(e.target);
+    startRailDiscovery();
+  });
+},{rootMargin:"900px"});
+const colSec = document.getElementById("collection");
+if(colSec) railIO.observe(colSec);
+setTimeout(startRailDiscovery, 3500);
+
+/* ---- lightbox ---- */
+const lb = document.getElementById("lb");
+const lbImg = document.getElementById("lbImg");
+let lbState = null;
+
+function renderLb(){
+  if(!lbState) return;
+  const urls = railPhotos[lbState.cat.key];
+  lbImg.src = urls[lbState.idx];
+  lbImg.alt = catLabel(lbState.cat.name) + " " + (lbState.idx + 1);
+  lb.querySelector(".lb-cap").textContent = catLabel(lbState.cat.name);
+  lb.querySelector(".lb-count").textContent = (lbState.idx + 1) + " / " + urls.length;
+  [lbState.idx - 1, lbState.idx + 1].forEach(j=>{
+    if(urls[j]){ const p = new Image(); p.src = urls[j]; }
+  });
+}
+function openLb(cat, idx){
+  lbState = {cat, idx};
+  lb.hidden = false;
+  requestAnimationFrame(()=>lb.classList.add("open"));
+  document.body.style.overflow = "hidden";
+  renderLb();
+}
+function closeLb(){
+  lb.classList.remove("open");
+  document.body.style.overflow = "";
+  lbState = null;
+  setTimeout(()=>{ if(!lbState) lb.hidden = true; }, 320);
+}
+function stepLb(d){
+  if(!lbState) return;
+  const n = railPhotos[lbState.cat.key].length;
+  lbState.idx = (lbState.idx + d + n) % n;
+  renderLb();
+}
+lb.querySelector(".lb-x").addEventListener("click", closeLb);
+lb.querySelector(".lb-prev").addEventListener("click", e=>{ e.stopPropagation(); stepLb(-1); });
+lb.querySelector(".lb-next").addEventListener("click", e=>{ e.stopPropagation(); stepLb(1); });
+lb.addEventListener("click", e=>{
+  if(e.target === lb || e.target.classList.contains("lb-stage") || e.target.classList.contains("lb-meta")) closeLb();
+});
+document.addEventListener("keydown", e=>{
+  if(lb.hidden) return;
+  if(e.key === "Escape") closeLb();
+  else if(e.key === "ArrowLeft") stepLb(-1);
+  else if(e.key === "ArrowRight") stepLb(1);
+});
+let lbTouchX = null;
+lb.addEventListener("touchstart", e=>{ lbTouchX = e.touches[0].clientX; }, {passive:true});
+lb.addEventListener("touchend", e=>{
+  if(lbTouchX === null) return;
+  const dx = e.changedTouches[0].clientX - lbTouchX;
+  lbTouchX = null;
+  if(Math.abs(dx) > 45) stepLb(dx < 0 ? 1 : -1);
+}, {passive:true});
+refreshGalleryAria();
 </script>
 </body>
 </html>

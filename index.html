@@ -337,6 +337,68 @@
     box-shadow:0 2px 16px rgba(166,58,43,.4);
   }
 
+  /* ---------------- feature chapters (scroll-driven) ---------------- */
+  .chapter{height:220vh;position:relative}
+  .ch-sticky{position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden;display:flex;align-items:flex-end}
+  .ch-media{position:absolute;inset:0;overflow:hidden;background:var(--ink-2)}
+  .ch-zoom{position:absolute;inset:0;transform:scale(1.16)}
+  .ch-zoom img{width:100%;height:100%;object-fit:cover}
+  .ch-ph{
+    position:absolute;inset:0;display:none;place-items:center;
+    background:radial-gradient(60% 50% at 50% 42%,rgba(201,162,92,.10),transparent 70%),var(--ink-2);
+  }
+  .chapter.empty .ch-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px}
+  .ch-ph svg{width:min(300px,48vw);height:auto;color:rgba(201,162,92,.45)}
+  .ch-ph .ph-note{
+    font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--parchment-dim);white-space:nowrap;
+  }
+  .ch-shade{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,rgba(13,9,5,.3) 0%,transparent 32%,transparent 52%,rgba(13,9,5,.9) 100%);
+  }
+  .ch-copy{
+    position:relative;z-index:2;max-width:720px;
+    padding:0 clamp(24px,6vw,84px) clamp(64px,11vh,120px);
+    opacity:0;transform:translateY(46px);
+  }
+  .ch-kicker{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--brass);margin-bottom:18px}
+  .ch-copy h3{
+    font-size:clamp(34px,4.6vw,64px);color:var(--parchment);font-weight:500;
+    line-height:1.12;margin-bottom:18px;text-wrap:balance;
+  }
+  .ch-copy p{color:rgba(236,224,201,.82);font-size:clamp(15px,1.4vw,18px);max-width:520px}
+
+  /* ---------------- numbers band ---------------- */
+  .numbers{
+    border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
+    background:linear-gradient(180deg,rgba(201,162,92,.045),transparent 70%);
+    padding:clamp(70px,9vw,110px) 0;
+  }
+  .numbers .sec-label{justify-content:center;margin-bottom:54px}
+  .numbers .sec-label::after{content:"";width:38px;height:1px;background:var(--brass-dim)}
+  .num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:34px;text-align:center}
+  .num-n{font-family:var(--serif);font-size:clamp(46px,6.4vw,88px);color:var(--brass-bright);line-height:1}
+  .num-l{margin-top:12px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--parchment-dim)}
+
+  /* ---------------- timeline ---------------- */
+  .timeline{position:relative;max-width:860px;margin:clamp(50px,7vw,90px) auto 0}
+  .timeline::before{
+    content:"";position:absolute;left:50%;top:6px;bottom:0;width:1px;margin-left:-.5px;
+    background:linear-gradient(180deg,transparent,var(--brass-dim) 8%,var(--brass-dim) 88%,transparent);
+  }
+  .tl-item{position:relative;width:50%;padding:0 44px 64px;box-sizing:border-box}
+  .tl-item:nth-child(odd){left:0;text-align:right}
+  .tl-item:nth-child(even){left:50%;text-align:left}
+  .tl-item::before{
+    content:"";position:absolute;top:12px;width:9px;height:9px;border-radius:50%;
+    background:var(--ink);border:1px solid var(--brass);
+  }
+  .tl-item:nth-child(odd)::before{right:-5.5px}
+  .tl-item:nth-child(even)::before{left:-5.5px}
+  .tl-y{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3vw,38px);color:var(--brass-bright);line-height:1.05;margin-bottom:10px}
+  html[data-lang="zh"] .tl-y{font-style:normal;font-family:"Songti SC","STSong","SimSun",serif}
+  .tl-t{color:var(--parchment-dim);font-size:15px;line-height:1.75}
+
   /* ---------------- music toggle ---------------- */
   .music-btn{
     position:fixed;right:26px;bottom:26px;z-index:500;
@@ -374,6 +436,11 @@
   /* ---------------- responsive ---------------- */
   @media (max-width:960px){
     nav{display:none}
+    .chapter{height:200vh}
+    .num-grid{grid-template-columns:repeat(2,1fr);gap:44px 20px}
+    .timeline::before{left:12px}
+    .tl-item,.tl-item:nth-child(odd),.tl-item:nth-child(even){width:100%;left:0;text-align:left;padding:0 0 52px 44px}
+    .tl-item:nth-child(odd)::before,.tl-item:nth-child(even)::before{left:6.5px;right:auto}
     .hero-grid{grid-template-columns:1fr;gap:20px}
     .hero-art{order:-1;margin-top:20px}
     .hero-art .rings{width:min(400px,86vw);height:min(400px,86vw)}
@@ -622,6 +689,128 @@
     </div>
   </section>
 
+  <!-- ============ FEATURE CHAPTERS (scroll-driven) ============ -->
+  <section class="chapter">
+    <div class="ch-sticky">
+      <div class="ch-media">
+        <div class="ch-zoom">
+          <img src="photos/feature-1.jpg" alt="" onerror="this.closest('.chapter').classList.add('empty');this.remove()">
+          <div class="ch-ph">
+            <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+              <rect x="28" y="10" width="64" height="62" rx="10"/>
+              <circle cx="60" cy="41" r="21"/>
+              <line x1="60" y1="24" x2="60" y2="28"/><line x1="77" y1="41" x2="73" y2="41"/>
+              <line x1="60" y1="58" x2="60" y2="54"/><line x1="43" y1="41" x2="47" y2="41"/>
+              <line x1="60" y1="41" x2="52" y2="33" stroke-width="1.8"/>
+              <line x1="60" y1="41" x2="68" y2="31"/>
+              <path d="M46 72 L46 94 L74 94 L74 72"/>
+              <line x1="60" y1="72" x2="60" y2="85"/>
+              <circle cx="60" cy="90" r="6"/>
+            </svg>
+            <span class="ph-note" data-i18n="ph"></span>
+          </div>
+        </div>
+        <div class="ch-shade"></div>
+      </div>
+      <div class="ch-copy">
+        <div class="ch-kicker" data-i18n="ch1.kicker"></div>
+        <h3 class="display" data-i18n="ch1.title"></h3>
+        <p data-i18n="ch1.text"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="ch-sticky">
+      <div class="ch-media">
+        <div class="ch-zoom">
+          <img src="photos/feature-2.jpg" alt="" onerror="this.closest('.chapter').classList.add('empty');this.remove()">
+          <div class="ch-ph">
+            <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+              <circle cx="30" cy="86" r="17"/><circle cx="30" cy="86" r="3"/>
+              <circle cx="92" cy="86" r="17"/><circle cx="92" cy="86" r="3"/>
+              <line x1="92" y1="86" x2="80" y2="48"/>
+              <path d="M80 48 Q88 41 97 44"/>
+              <circle cx="73" cy="45" r="5"/>
+              <path d="M24 62 Q36 52 50 54"/>
+              <path d="M48 53 Q62 44 77 50 Q63 60 48 53 Z"/>
+              <path d="M50 56 L56 72"/>
+              <circle cx="58" cy="74" r="9"/>
+              <line x1="30" y1="86" x2="50" y2="76"/>
+              <line x1="66" y1="70" x2="80" y2="48"/>
+              <path d="M58 84 Q74 90 90 82" stroke-width="1"/>
+            </svg>
+            <span class="ph-note" data-i18n="ph"></span>
+          </div>
+        </div>
+        <div class="ch-shade"></div>
+      </div>
+      <div class="ch-copy">
+        <div class="ch-kicker" data-i18n="ch2.kicker"></div>
+        <h3 class="display" data-i18n="ch2.title"></h3>
+        <p data-i18n="ch2.text"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="ch-sticky">
+      <div class="ch-media">
+        <div class="ch-zoom">
+          <img src="photos/feature-3.jpg" alt="" onerror="this.closest('.chapter').classList.add('empty');this.remove()">
+          <div class="ch-ph">
+            <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+              <path d="M28 54 C28 22 92 22 92 54"/>
+              <circle cx="27" cy="57" r="4"/><circle cx="93" cy="57" r="4"/>
+              <line x1="60" y1="30" x2="60" y2="62"/>
+              <path d="M42 34 L44 62"/><path d="M78 34 L76 62"/>
+              <rect x="30" y="62" width="60" height="9" rx="2"/>
+              <line x1="35" y1="71" x2="33" y2="102"/>
+              <line x1="85" y1="71" x2="87" y2="102"/>
+              <line x1="33" y1="92" x2="87" y2="92" stroke-width="1"/>
+            </svg>
+            <span class="ph-note" data-i18n="ph"></span>
+          </div>
+        </div>
+        <div class="ch-shade"></div>
+      </div>
+      <div class="ch-copy">
+        <div class="ch-kicker" data-i18n="ch3.kicker"></div>
+        <h3 class="display" data-i18n="ch3.title"></h3>
+        <p data-i18n="ch3.text"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NUMBERS ============ -->
+  <div class="numbers">
+    <div class="wrap">
+      <div class="sec-label" data-i18n="nums.label"></div>
+      <div class="num-grid">
+        <div><div class="num-n display" data-count="300" data-suffix="+">300+</div><div class="num-l" data-i18n="stat1"></div></div>
+        <div><div class="num-n display" data-count="30" data-suffix="+">30+</div><div class="num-l" data-i18n="stat2"></div></div>
+        <div><div class="num-n display" data-count="6">6</div><div class="num-l" data-i18n="stat3"></div></div>
+        <div><div class="num-n display" data-count="1">1</div><div class="num-l" data-i18n="n4"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TIMELINE ============ -->
+  <section id="journey">
+    <div class="wrap">
+      <div class="col-head reveal" style="margin-bottom:0">
+        <div class="sec-label" data-i18n="tl.label"></div>
+        <h2 class="display" data-i18n="tl.title"></h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item reveal"><div class="tl-y" data-i18n="tl1.y"></div><div class="tl-t" data-i18n="tl1.t"></div></div>
+        <div class="tl-item reveal d1"><div class="tl-y" data-i18n="tl2.y"></div><div class="tl-t" data-i18n="tl2.t"></div></div>
+        <div class="tl-item reveal"><div class="tl-y" data-i18n="tl3.y"></div><div class="tl-t" data-i18n="tl3.t"></div></div>
+        <div class="tl-item reveal d1"><div class="tl-y" data-i18n="tl4.y"></div><div class="tl-t" data-i18n="tl4.t"></div></div>
+      </div>
+    </div>
+  </section>
+
   <div class="divider" aria-hidden="true">❖</div>
 
   <!-- ============ GALLERY ============ -->
@@ -741,6 +930,23 @@ const I18N = {
     "meta.title":"Tàng Trân Các 藏珍阁 — Bộ sưu tập tư nhân",
     "meta.desc":"Bộ sưu tập tư nhân tại Việt Nam: đồng hồ cổ, đồng hồ quả lắc ODO, xe máy cổ, xe đạp Peugeot, chum vại cổ và đồ gỗ quý.",
     "music.mute":"Tắt nhạc nền","music.play":"Mở nhạc nền",
+    "ch1.kicker":"Chương I — Đồng hồ quả lắc ODO",
+    "ch1.title":"Mỗi giờ, ngôi nhà lại thở",
+    "ch1.text":"Bộ máy Pháp gần trăm năm tuổi, tiếng chuông Westminster trầm ấm. Lên dây cót mỗi tuần một lần — như một nghi thức nhỏ của gia đình.",
+    "ch2.kicker":"Chương II — Honda 67",
+    "ch2.title":"Ký ức chạy trên hai bánh xe",
+    "ch2.text":"Nguyên bản đến từng con ốc, từng lớp sơn. Chỉ một cú đạp cần khởi động, tiếng máy giòn giã năm xưa lại vang lên giữa sân nhà.",
+    "ch3.kicker":"Chương III — Đồ gỗ quý",
+    "ch3.title":"Vân gỗ giữ lấy thời gian",
+    "ch3.text":"Gỗ trắc càng dùng càng lên nước, càng bóng càng sâu. Bàn tay ba thế hệ đã vuốt qua mặt gỗ này.",
+    "nums.label":"Tàng Trân Các qua những con số",
+    "n4":"Niềm đam mê",
+    "tl.label":"Hành trình",
+    "tl.title":"Ba mươi năm, bốn cột mốc",
+    "tl1.y":"1992","tl1.t":"Chiếc ODO đầu tiên — kỷ vật của gia đình, khởi đầu của tất cả.",
+    "tl2.y":"2001","tl2.t":"Chiếc Honda 67 đầu tiên về sân nhà, mở ra một góc dành cho xe cổ.",
+    "tl3.y":"2010","tl3.t":"Bộ sưu tập vượt mốc một trăm hiện vật; những người bạn đồng điệu đầu tiên tìm đến.",
+    "tl4.y":"Hôm nay","tl4.t":"Hơn ba trăm hiện vật — và cánh cửa luôn rộng mở cho những người yêu cái đẹp.",
     "portrait.alt":"Chân dung nhà sưu tầm",
     "nav.about":"Nhà sưu tầm","nav.col":"Bộ sưu tập","nav.gal":"Trân phẩm","nav.ct":"Giao lưu",
     "hero.kicker":"Bộ sưu tập tư nhân · Việt Nam",
@@ -799,6 +1005,23 @@ const I18N = {
     "meta.title":"藏珍阁 Tàng Trân Các — 私人收藏",
     "meta.desc":"越南私人收藏：古董钟表、ODO 摆钟、老式摩托车、Peugeot 自行车、老水缸与红木家具。",
     "music.mute":"关闭背景音乐","music.play":"播放背景音乐",
+    "ch1.kicker":"第一章 — ODO 摆钟",
+    "ch1.title":"每到整点，老宅呼吸一次",
+    "ch1.text":"近百年的法国机芯，西敏寺钟声温润低回。每周上一次发条——是这个家小小的仪式。",
+    "ch2.kicker":"第二章 — Honda 67",
+    "ch2.title":"记忆，在两个车轮上奔跑",
+    "ch2.text":"每颗螺钉、每层漆面，皆是原装。踩下启动杆，旧日清脆的引擎声便在院子里重新响起。",
+    "ch3.kicker":"第三章 — 红木家具",
+    "ch3.title":"木纹里，锁着时间",
+    "ch3.text":"红酸枝越用越润，包浆越养越深。三代人的手，抚过这一方木面。",
+    "nums.label":"数字里的藏珍阁",
+    "n4":"生痴迷",
+    "tl.label":"收藏之路",
+    "tl.title":"三十年，四个印记",
+    "tl1.y":"1992","tl1.t":"第一台 ODO 摆钟——家传之物，一切的起点。",
+    "tl2.y":"2001","tl2.t":"第一辆 Honda 67 进了院子，从此有了老车的角落。",
+    "tl3.y":"2010","tl3.t":"藏品突破一百件，第一批同好慕名而来。",
+    "tl4.y":"今天","tl4.t":"三百余件藏品——大门始终为珍爱美物之人敞开。",
     "portrait.alt":"藏主肖像",
     "nav.about":"藏主","nav.col":"藏品","nav.gal":"珍品","nav.ct":"会友",
     "hero.kicker":"私人收藏 · 越南",
@@ -857,6 +1080,23 @@ const I18N = {
     "meta.title":"Tàng Trân Các 藏珍阁 — A Private Collection",
     "meta.desc":"A private collection in Vietnam: antique clocks, ODO pendulum clocks, vintage motorcycles, Peugeot bicycles, antique water jars, and precious rosewood furniture.",
     "music.mute":"Mute background music","music.play":"Play background music",
+    "ch1.kicker":"Chapter I — The ODO Pendulum Clock",
+    "ch1.title":"On the hour, the house breathes",
+    "ch1.text":"A French movement nearly a century old, its Westminster chime warm and low. Wound once a week — a small family ritual.",
+    "ch2.kicker":"Chapter II — Honda 67",
+    "ch2.title":"Memory rides on two wheels",
+    "ch2.text":"Original down to every bolt and every coat of paint. One kick of the starter, and the crisp engine note of another era fills the courtyard again.",
+    "ch3.kicker":"Chapter III — Precious Rosewood",
+    "ch3.title":"Time, held in the grain",
+    "ch3.text":"Trắc rosewood grows deeper and more lustrous with use. Three generations of hands have rested on this wood.",
+    "nums.label":"The collection in numbers",
+    "n4":"Passion",
+    "tl.label":"The Journey",
+    "tl.title":"Thirty years, four milestones",
+    "tl1.y":"1992","tl1.t":"The first ODO — a family keepsake, and the beginning of everything.",
+    "tl2.y":"2001","tl2.t":"The first Honda 67 rolls into the courtyard, opening a corner for vintage machines.",
+    "tl3.y":"2010","tl3.t":"The collection passes one hundred pieces; the first kindred spirits come to visit.",
+    "tl4.y":"Today","tl4.t":"More than three hundred pieces — and a door always open to those who love beautiful things.",
     "portrait.alt":"Portrait of the collector",
     "nav.about":"The Collector","nav.col":"Collection","nav.gal":"Highlights","nav.ct":"Connect",
     "hero.kicker":"A Private Collection · Vietnam",
@@ -915,6 +1155,23 @@ const I18N = {
     "meta.title":"Tàng Trân Các 藏珍阁 — Collection privée",
     "meta.desc":"Collection privée au Vietnam : horloges anciennes, pendules ODO, motos d'époque, bicyclettes Peugeot, jarres anciennes et mobilier en bois précieux.",
     "music.mute":"Couper la musique","music.play":"Activer la musique",
+    "ch1.kicker":"Chapitre I — L'horloge ODO",
+    "ch1.title":"À chaque heure, la maison respire",
+    "ch1.text":"Un mouvement français presque centenaire, au carillon Westminster chaud et grave. Remonté une fois par semaine — un petit rituel familial.",
+    "ch2.kicker":"Chapitre II — Honda 67",
+    "ch2.title":"La mémoire roule sur deux roues",
+    "ch2.text":"D'origine jusqu'à la moindre vis, jusqu'à la moindre couche de peinture. Un coup de kick, et le chant clair du moteur d'autrefois emplit à nouveau la cour.",
+    "ch3.kicker":"Chapitre III — Bois précieux",
+    "ch3.title":"Le temps, retenu dans le veinage",
+    "ch3.text":"Le bois de trắc se patine et sa teinte s'approfondit à l'usage. Les mains de trois générations se sont posées sur ce bois.",
+    "nums.label":"La collection en chiffres",
+    "n4":"Passion",
+    "tl.label":"Le parcours",
+    "tl.title":"Trente ans, quatre jalons",
+    "tl1.y":"1992","tl1.t":"La première ODO — souvenir de famille, le début de tout.",
+    "tl2.y":"2001","tl2.t":"La première Honda 67 entre dans la cour. Le coin des machines anciennes est né.",
+    "tl3.y":"2010","tl3.t":"La collection dépasse les cent pièces. Les premiers passionnés viennent la voir.",
+    "tl4.y":"Aujourd'hui","tl4.t":"Plus de trois cents pièces — et une porte toujours ouverte aux amoureux du beau.",
     "portrait.alt":"Portrait du collectionneur",
     "nav.about":"Le collectionneur","nav.col":"Collection","nav.gal":"Pièces choisies","nav.ct":"Échanger",
     "hero.kicker":"Collection privée · Vietnam",
@@ -1076,6 +1333,72 @@ const io = new IntersectionObserver(entries=>{
   });
 },{threshold:.12,rootMargin:"0px 0px -40px 0px"});
 document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+/* scroll-driven effects: hero parallax + chapter zoom (Apple-style pinned scenes) */
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const chapterEls = Array.from(document.querySelectorAll(".chapter"));
+const heroGrid = document.querySelector(".hero-grid");
+let fxTick = false;
+
+function scrollFx(){
+  fxTick = false;
+  const vh = window.innerHeight;
+  const sy = window.scrollY;
+  if(heroGrid){
+    if(sy < vh){
+      heroGrid.style.transform = "translateY(" + (sy*0.12).toFixed(1) + "px)";
+      heroGrid.style.opacity = Math.max(0, 1 - sy/(vh*0.85)).toFixed(3);
+    }else{
+      heroGrid.style.opacity = "0";
+    }
+  }
+  chapterEls.forEach(ch=>{
+    const r = ch.getBoundingClientRect();
+    if(r.bottom < -80 || r.top > vh + 80) return;
+    const total = Math.max(1, r.height - vh);
+    const p = Math.min(1, Math.max(0, -r.top/total));
+    const zoom = ch.querySelector(".ch-zoom");
+    const copy = ch.querySelector(".ch-copy");
+    if(zoom) zoom.style.transform = "scale(" + (1.16 - 0.16*Math.min(1, p*1.5)).toFixed(4) + ")";
+    if(copy){
+      const cp = Math.min(1, Math.max(0, (p - 0.15)/0.3));
+      copy.style.opacity = cp.toFixed(3);
+      copy.style.transform = "translateY(" + ((1-cp)*46).toFixed(1) + "px)";
+    }
+  });
+}
+if(!reducedMotion){
+  window.addEventListener("scroll", ()=>{ if(!fxTick){ fxTick = true; requestAnimationFrame(scrollFx); } }, {passive:true});
+  window.addEventListener("resize", scrollFx);
+  scrollFx();
+}else{
+  document.querySelectorAll(".ch-zoom").forEach(z=>{ z.style.transform = "none"; });
+  document.querySelectorAll(".ch-copy").forEach(c=>{ c.style.opacity = "1"; c.style.transform = "none"; });
+}
+
+/* count-up numbers */
+function countUp(el){
+  const target = parseInt(el.dataset.count, 10);
+  const suffix = el.dataset.suffix || "";
+  const t0 = performance.now(), dur = 1600;
+  function tick(t){
+    const p = Math.min(1, (t - t0)/dur);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target*eased) + suffix;
+    if(p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  setTimeout(()=>{ el.textContent = target + suffix; }, dur + 400);
+}
+const numIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    numIO.unobserve(e.target);
+    if(reducedMotion){ e.target.textContent = e.target.dataset.count + (e.target.dataset.suffix || ""); }
+    else{ countUp(e.target); }
+  });
+},{threshold:.6});
+document.querySelectorAll(".num-n").forEach(el=>numIO.observe(el));
 </script>
 </body>
 </html>

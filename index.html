@@ -337,13 +337,36 @@
     box-shadow:0 2px 16px rgba(166,58,43,.4);
   }
 
+  /* ---------------- music toggle ---------------- */
+  .music-btn{
+    position:fixed;right:26px;bottom:26px;z-index:500;
+    width:48px;height:48px;border-radius:50%;
+    background:rgba(23,16,9,.72);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid var(--hairline);color:var(--brass);
+    display:grid;place-items:center;cursor:pointer;padding:0;
+    transition:color .3s,border-color .3s,transform .3s;
+  }
+  .music-btn svg{width:21px;height:21px;display:block}
+  .music-btn:hover{color:var(--brass-bright);border-color:rgba(201,162,92,.55);transform:translateY(-2px)}
+  .music-btn .slash{display:none}
+  .music-btn.off .w1,.music-btn.off .w2{display:none}
+  .music-btn.off .slash{display:block}
+  .music-btn.off{color:var(--parchment-dim)}
+  .music-btn.playing::before{
+    content:"";position:absolute;inset:-1px;border-radius:50%;
+    border:1px solid rgba(201,162,92,.5);
+    animation:breathe 2.6s ease-out infinite;
+  }
+  @keyframes breathe{0%{transform:scale(1);opacity:.7}70%{transform:scale(1.55);opacity:0}100%{transform:scale(1.55);opacity:0}}
+
   /* ---------------- reveal ---------------- */
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
   .reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}.reveal.d3{transition-delay:.36s}
 
   @media (prefers-reduced-motion:reduce){
-    #pend,.scroll-hint::after{animation:none}
+    #pend,.scroll-hint::after,.music-btn.playing::before{animation:none}
     .reveal{opacity:1;transform:none;transition:none}
     html{scroll-behavior:auto}
   }
@@ -370,6 +393,7 @@
     .stats{flex-wrap:wrap;gap:22px}
     .brand-txt{display:none}
     .lang-btn{padding:7px 11px}
+    .music-btn{right:16px;bottom:16px;width:44px;height:44px}
   }
 </style>
 </head>
@@ -699,11 +723,24 @@
   <div data-i18n="foot"></div>
 </footer>
 
+<!-- Nhạc nền / 背景音乐: Chopin — Nocturne in G major, Op. 37 No. 2
+     Performer: Olga Gurevich · Source: Musopen (musopen.org) · License: CC0 / Public Domain -->
+<audio id="bgm" loop preload="none" src="music/nocturne.mp3"></audio>
+<button class="music-btn" id="musicBtn" type="button" aria-pressed="true">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M11 5 6 9H3v6h3l5 4z"/>
+    <path class="w1" d="M15.5 8.5a5 5 0 0 1 0 7"/>
+    <path class="w2" d="M18 6a8.5 8.5 0 0 1 0 12"/>
+    <line class="slash" x1="4.5" y1="4.5" x2="19.5" y2="19.5"/>
+  </svg>
+</button>
+
 <script>
 const I18N = {
   vi: {
     "meta.title":"Tàng Trân Các 藏珍阁 — Bộ sưu tập tư nhân",
     "meta.desc":"Bộ sưu tập tư nhân tại Việt Nam: đồng hồ cổ, đồng hồ quả lắc ODO, xe máy cổ, xe đạp Peugeot, chum vại cổ và đồ gỗ quý.",
+    "music.mute":"Tắt nhạc nền","music.play":"Mở nhạc nền",
     "portrait.alt":"Chân dung nhà sưu tầm",
     "nav.about":"Nhà sưu tầm","nav.col":"Bộ sưu tập","nav.gal":"Trân phẩm","nav.ct":"Giao lưu",
     "hero.kicker":"Bộ sưu tập tư nhân · Việt Nam",
@@ -761,6 +798,7 @@ const I18N = {
   zh: {
     "meta.title":"藏珍阁 Tàng Trân Các — 私人收藏",
     "meta.desc":"越南私人收藏：古董钟表、ODO 摆钟、老式摩托车、Peugeot 自行车、老水缸与红木家具。",
+    "music.mute":"关闭背景音乐","music.play":"播放背景音乐",
     "portrait.alt":"藏主肖像",
     "nav.about":"藏主","nav.col":"藏品","nav.gal":"珍品","nav.ct":"会友",
     "hero.kicker":"私人收藏 · 越南",
@@ -818,6 +856,7 @@ const I18N = {
   en: {
     "meta.title":"Tàng Trân Các 藏珍阁 — A Private Collection",
     "meta.desc":"A private collection in Vietnam: antique clocks, ODO pendulum clocks, vintage motorcycles, Peugeot bicycles, antique water jars, and precious rosewood furniture.",
+    "music.mute":"Mute background music","music.play":"Play background music",
     "portrait.alt":"Portrait of the collector",
     "nav.about":"The Collector","nav.col":"Collection","nav.gal":"Highlights","nav.ct":"Connect",
     "hero.kicker":"A Private Collection · Vietnam",
@@ -875,6 +914,7 @@ const I18N = {
   fr: {
     "meta.title":"Tàng Trân Các 藏珍阁 — Collection privée",
     "meta.desc":"Collection privée au Vietnam : horloges anciennes, pendules ODO, motos d'époque, bicyclettes Peugeot, jarres anciennes et mobilier en bois précieux.",
+    "music.mute":"Couper la musique","music.play":"Activer la musique",
     "portrait.alt":"Portrait du collectionneur",
     "nav.about":"Le collectionneur","nav.col":"Collection","nav.gal":"Pièces choisies","nav.ct":"Échanger",
     "hero.kicker":"Collection privée · Vietnam",
@@ -932,9 +972,11 @@ const I18N = {
 };
 
 const LANGS = ["vi","zh","en","fr"];
+let curLang = "vi";
 
 function setLang(l){
   if(!I18N[l]) l = "vi";
+  curLang = l;
   const d = I18N[l];
   document.documentElement.lang = l === "zh" ? "zh-CN" : l;
   document.documentElement.dataset.lang = l;
@@ -952,6 +994,7 @@ function setLang(l){
     b.classList.toggle("on", on);
     b.setAttribute("aria-pressed", String(on));
   });
+  updateMusicUI();
   try{ localStorage.setItem("ttc-lang", l); }catch(e){}
 }
 
@@ -971,6 +1014,53 @@ function detectLang(){
 document.querySelectorAll(".lang-btn").forEach(b=>{
   b.addEventListener("click", ()=>setLang(b.dataset.lang));
 });
+
+/* background music */
+const bgm = document.getElementById("bgm");
+const musicBtn = document.getElementById("musicBtn");
+const MUSIC_VOL = 0.22;
+let musicWanted = true;
+try{ musicWanted = localStorage.getItem("ttc-music") !== "off"; }catch(e){}
+let fadeTimer = null;
+
+function fadeVol(target, ms, then){
+  clearInterval(fadeTimer);
+  const start = bgm.volume, steps = Math.max(1, Math.round(ms/50));
+  let i = 0;
+  fadeTimer = setInterval(()=>{
+    i++;
+    bgm.volume = Math.min(1, Math.max(0, start + (target-start)*(i/steps)));
+    if(i >= steps){ clearInterval(fadeTimer); if(then) then(); }
+  }, 50);
+}
+function updateMusicUI(){
+  const d = I18N[curLang] || I18N.vi;
+  musicBtn.classList.toggle("off", !musicWanted);
+  const label = musicWanted ? d["music.mute"] : d["music.play"];
+  musicBtn.setAttribute("aria-label", label);
+  musicBtn.title = label;
+  musicBtn.setAttribute("aria-pressed", String(musicWanted));
+}
+function startMusic(){
+  if(!musicWanted || !bgm.paused) return;
+  bgm.volume = 0;
+  bgm.play().then(()=>fadeVol(MUSIC_VOL, 2400)).catch(()=>{});
+}
+musicBtn.addEventListener("click", ()=>{
+  musicWanted = !musicWanted;
+  try{ localStorage.setItem("ttc-music", musicWanted ? "on" : "off"); }catch(e){}
+  if(musicWanted){ startMusic(); }
+  else{ fadeVol(0, 600, ()=>bgm.pause()); }
+  updateMusicUI();
+});
+bgm.addEventListener("play", ()=>musicBtn.classList.add("playing"));
+bgm.addEventListener("pause", ()=>musicBtn.classList.remove("playing"));
+/* browsers block autoplay with sound: try once, then start on first interaction */
+startMusic();
+["pointerdown","keydown","touchstart"].forEach(ev=>
+  document.addEventListener(ev, startMusic, {passive:true})
+);
+
 setLang(detectLang());
 
 /* header scroll state */

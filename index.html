@@ -415,8 +415,15 @@
   .chapter{height:220vh;position:relative}
   .ch-sticky{position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden;display:flex;align-items:flex-end}
   .ch-media{position:absolute;inset:0;overflow:hidden;background:var(--ink-2)}
-  .ch-zoom{position:absolute;inset:0;transform:scale(1.16)}
-  .ch-zoom img{width:100%;height:100%;object-fit:cover}
+  .ch-zoom{position:absolute;inset:0;transform:scale(1.08);transform-origin:center 40%}
+  .ch-zoom img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+  /* keep each photo's subject in frame while it zooms */
+  .cf-clock .ch-zoom{transform-origin:center 22%}
+  .cf-clock .ch-zoom img{object-position:center 22%}
+  .cf-moto .ch-zoom{transform-origin:center 50%}
+  .cf-moto .ch-zoom img{object-position:center 50%}
+  .cf-wood .ch-zoom{transform-origin:center 46%}
+  .cf-wood .ch-zoom img{object-position:center 46%}
   .ch-ph{
     position:absolute;inset:0;display:none;place-items:center;
     background:radial-gradient(60% 50% at 50% 42%,rgba(201,162,92,.10),transparent 70%),var(--ink-2);
@@ -784,7 +791,7 @@
   </section>
 
   <!-- ============ FEATURE CHAPTERS (scroll-driven) ============ -->
-  <section class="chapter">
+  <section class="chapter cf-clock">
     <div class="ch-sticky">
       <div class="ch-media">
         <div class="ch-zoom">
@@ -814,7 +821,7 @@
     </div>
   </section>
 
-  <section class="chapter">
+  <section class="chapter cf-moto">
     <div class="ch-sticky">
       <div class="ch-media">
         <div class="ch-zoom">
@@ -847,7 +854,7 @@
     </div>
   </section>
 
-  <section class="chapter">
+  <section class="chapter cf-wood">
     <div class="ch-sticky">
       <div class="ch-media">
         <div class="ch-zoom">
@@ -1034,13 +1041,13 @@ const I18N = {
     "meta.desc":"Bộ sưu tập tư nhân tại Việt Nam: đồng hồ cổ, xe máy cổ, xe đạp Peugeot, đồ gỗ khảm trai, âm thanh cổ và đồ sứ.",
     "music.mute":"Tắt nhạc nền","music.play":"Mở nhạc nền",
     "lb.close":"Đóng","lb.prev":"Ảnh trước","lb.next":"Ảnh sau",
-    "ch1.kicker":"Chương I — Đồng hồ quả lắc ODO",
+    "ch1.kicker":"Chương I · Đồng hồ cổ",
     "ch1.title":"Mỗi giờ, ngôi nhà lại thở",
     "ch1.text":"Bộ máy Pháp gần trăm năm tuổi, tiếng chuông Westminster trầm ấm. Lên dây cót mỗi tuần một lần — như một nghi thức nhỏ của gia đình.",
-    "ch2.kicker":"Chương II — Honda 67",
+    "ch2.kicker":"Chương II · Xe máy cổ",
     "ch2.title":"Ký ức chạy trên hai bánh xe",
     "ch2.text":"Nguyên bản đến từng con ốc, từng lớp sơn. Chỉ một cú đạp cần khởi động, tiếng máy giòn giã năm xưa lại vang lên giữa sân nhà.",
-    "ch3.kicker":"Chương III — Đồ gỗ quý",
+    "ch3.kicker":"Chương III · Gỗ khảm trai",
     "ch3.title":"Vân gỗ giữ lấy thời gian",
     "ch3.text":"Gỗ trắc càng dùng càng lên nước, càng bóng càng sâu. Bàn tay ba thế hệ đã vuốt qua mặt gỗ này.",
     "nums.label":"Tàng Trân Các qua những con số",
@@ -1110,13 +1117,13 @@ const I18N = {
     "meta.desc":"越南私人收藏：古董钟表、老式摩托车、Peugeot 自行车、红木螺钿、老式影音与瓷器。",
     "music.mute":"关闭背景音乐","music.play":"播放背景音乐",
     "lb.close":"关闭","lb.prev":"上一张","lb.next":"下一张",
-    "ch1.kicker":"第一章 — ODO 摆钟",
+    "ch1.kicker":"第一章 · 古董钟表",
     "ch1.title":"每到整点，老宅呼吸一次",
     "ch1.text":"近百年的法国机芯，西敏寺钟声温润低回。每周上一次发条——是这个家小小的仪式。",
-    "ch2.kicker":"第二章 — Honda 67",
+    "ch2.kicker":"第二章 · 老式摩托车",
     "ch2.title":"记忆，在两个车轮上奔跑",
     "ch2.text":"每颗螺钉、每层漆面，皆是原装。踩下启动杆，旧日清脆的引擎声便在院子里重新响起。",
-    "ch3.kicker":"第三章 — 红木家具",
+    "ch3.kicker":"第三章 · 红木螺钿",
     "ch3.title":"木纹里，锁着时间",
     "ch3.text":"红酸枝越用越润，包浆越养越深。三代人的手，抚过这一方木面。",
     "nums.label":"数字里的藏珍阁",
@@ -1186,13 +1193,13 @@ const I18N = {
     "meta.desc":"A private collection in Vietnam: antique clocks, vintage motorcycles, Peugeot bicycles, mother-of-pearl rosewood, vintage audio and porcelain.",
     "music.mute":"Mute background music","music.play":"Play background music",
     "lb.close":"Close","lb.prev":"Previous photo","lb.next":"Next photo",
-    "ch1.kicker":"Chapter I — The ODO Pendulum Clock",
+    "ch1.kicker":"Chapter I · Antique Clocks",
     "ch1.title":"On the hour, the house breathes",
     "ch1.text":"A French movement nearly a century old, its Westminster chime warm and low. Wound once a week — a small family ritual.",
-    "ch2.kicker":"Chapter II — Honda 67",
+    "ch2.kicker":"Chapter II · Vintage Motorcycles",
     "ch2.title":"Memory rides on two wheels",
     "ch2.text":"Original down to every bolt and every coat of paint. One kick of the starter, and the crisp engine note of another era fills the courtyard again.",
-    "ch3.kicker":"Chapter III — Precious Rosewood",
+    "ch3.kicker":"Chapter III · Mother-of-Pearl Rosewood",
     "ch3.title":"Time, held in the grain",
     "ch3.text":"Trắc rosewood grows deeper and more lustrous with use. Three generations of hands have rested on this wood.",
     "nums.label":"The collection in numbers",
@@ -1262,13 +1269,13 @@ const I18N = {
     "meta.desc":"Collection privée au Vietnam : horloges anciennes, motos d'époque, bicyclettes Peugeot, bois nacré, audio d'époque et porcelaine.",
     "music.mute":"Couper la musique","music.play":"Activer la musique",
     "lb.close":"Fermer","lb.prev":"Photo précédente","lb.next":"Photo suivante",
-    "ch1.kicker":"Chapitre I — L'horloge ODO",
+    "ch1.kicker":"Chapitre I · Horloges anciennes",
     "ch1.title":"À chaque heure, la maison respire",
     "ch1.text":"Un mouvement français presque centenaire, au carillon Westminster chaud et grave. Remonté une fois par semaine — un petit rituel familial.",
-    "ch2.kicker":"Chapitre II — Honda 67",
+    "ch2.kicker":"Chapitre II · Motos d'époque",
     "ch2.title":"La mémoire roule sur deux roues",
     "ch2.text":"D'origine jusqu'à la moindre vis, jusqu'à la moindre couche de peinture. Un coup de kick, et le chant clair du moteur d'autrefois emplit à nouveau la cour.",
-    "ch3.kicker":"Chapitre III — Bois précieux",
+    "ch3.kicker":"Chapitre III · Bois nacré",
     "ch3.title":"Le temps, retenu dans le veinage",
     "ch3.text":"Le bois de trắc se patine et sa teinte s'approfondit à l'usage. Les mains de trois générations se sont posées sur ce bois.",
     "nums.label":"La collection en chiffres",
@@ -1480,7 +1487,7 @@ function scrollFx(){
     const p = Math.min(1, Math.max(0, -r.top/total));
     const zoom = ch.querySelector(".ch-zoom");
     const copy = ch.querySelector(".ch-copy");
-    if(zoom) zoom.style.transform = "scale(" + (1.16 - 0.16*Math.min(1, p*1.5)).toFixed(4) + ")";
+    if(zoom) zoom.style.transform = "scale(" + (1.0 + 0.22*Math.pow(1 - p, 1.4)).toFixed(4) + ")";
     if(copy){
       const cp = Math.min(1, Math.max(0, (p - 0.15)/0.3));
       copy.style.opacity = cp.toFixed(3);

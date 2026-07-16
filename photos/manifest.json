@@ -1,53 +1,74 @@
 {
  "clocks": [
-  "photos/clocks/1.jpg",
-  "photos/clocks/2.jpg",
-  "photos/clocks/3.jpg",
-  "photos/clocks/4.jpg",
-  "photos/clocks/5.jpg",
-  "photos/clocks/6.jpg"
- ],
- "pendulum": [
-  "photos/pendulum/1.jpg",
-  "photos/pendulum/2.jpg",
-  "photos/pendulum/3.jpg",
-  "photos/pendulum/4.jpg",
-  "photos/pendulum/5.jpg",
-  "photos/pendulum/6.jpg"
+  "photos/clocks/01.jpg",
+  "photos/clocks/02.jpg",
+  "photos/clocks/03.jpg",
+  "photos/clocks/04.jpg",
+  "photos/clocks/05.jpg",
+  "photos/clocks/06.jpg",
+  "photos/clocks/07.jpg",
+  "photos/clocks/08.jpg",
+  "photos/clocks/09.jpg",
+  "photos/clocks/10.jpg",
+  "photos/clocks/11.jpg"
  ],
  "moto": [
-  "photos/moto/1.jpg",
-  "photos/moto/2.jpg",
-  "photos/moto/3.jpg",
-  "photos/moto/4.jpg",
-  "photos/moto/5.jpg",
-  "photos/moto/6.jpg"
+  "photos/moto/01.jpg",
+  "photos/moto/02.jpg",
+  "photos/moto/03.jpg",
+  "photos/moto/04.jpg",
+  "photos/moto/05.jpg",
+  "photos/moto/06.jpg",
+  "photos/moto/07.jpg",
+  "photos/moto/08.jpg",
+  "photos/moto/09.jpg",
+  "photos/moto/10.jpg",
+  "photos/moto/11.jpg"
  ],
  "bike": [
-  "photos/bike/1.jpg",
-  "photos/bike/2.jpg",
-  "photos/bike/3.jpg",
-  "photos/bike/4.jpg",
-  "photos/bike/5.jpg",
-  "photos/bike/6.jpg"
- ],
- "jar": [
-  "photos/jar/1.jpg",
-  "photos/jar/2.jpg",
-  "photos/jar/3.jpg",
-  "photos/jar/4.jpg",
-  "photos/jar/5.jpg",
-  "photos/jar/6.jpg"
+  "photos/bike/01.jpg",
+  "photos/bike/02.jpg",
+  "photos/bike/03.jpg",
+  "photos/bike/04.jpg",
+  "photos/bike/05.jpg",
+  "photos/bike/06.jpg"
  ],
  "wood": [
-  "photos/wood/1.jpg",
-  "photos/wood/2.jpg",
-  "photos/wood/3.jpg",
-  "photos/wood/4.jpg",
-  "photos/wood/5.jpg",
-  "photos/wood/6.jpg"
+  "photos/wood/01.jpg",
+  "photos/wood/02.jpg",
+  "photos/wood/03.jpg",
+  "photos/wood/04.jpg",
+  "photos/wood/05.jpg",
+  "photos/wood/06.jpg",
+  "photos/wood/07.jpg",
+  "photos/wood/08.jpg"
  ],
- "portrait": [],
- "feature": [],
- "gallery": []
+ "audio": [
+  "photos/audio/01.jpg",
+  "photos/audio/02.jpg",
+  "photos/audio/03.jpg",
+  "photos/audio/04.jpg",
+  "photos/audio/05.jpg"
+ ],
+ "porcelain": [
+  "photos/porcelain/01.jpg",
+  "photos/porcelain/02.jpg",
+  "photos/porcelain/03.jpg"
+ ],
+ "portrait": [
+  "photos/portrait/01.jpg"
+ ],
+ "feature": [
+  "photos/feature/01.jpg",
+  "photos/feature/02.jpg",
+  "photos/feature/03.jpg"
+ ],
+ "gallery": [
+  "photos/gallery/01.jpg",
+  "photos/gallery/02.jpg",
+  "photos/gallery/03.jpg",
+  "photos/gallery/04.jpg",
+  "photos/gallery/05.jpg",
+  "photos/gallery/06.jpg"
+ ]
 }

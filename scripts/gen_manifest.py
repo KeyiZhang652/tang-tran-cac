@@ -5,7 +5,7 @@ import json, os, re, sys, unicodedata
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(REPO)
 
-FOLDERS = ["clocks", "pendulum", "moto", "bike", "jar", "wood", "portrait", "feature", "gallery"]
+FOLDERS = ["clocks", "moto", "bike", "wood", "audio", "porcelain", "portrait", "feature", "gallery"]
 EXTS = {".jpg", ".jpeg", ".png", ".webp"}
 MAX_PER_FOLDER = 24
 

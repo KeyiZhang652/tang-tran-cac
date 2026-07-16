@@ -1,0 +1,53 @@
+{
+ "clocks": [
+  "photos/clocks/1.jpg",
+  "photos/clocks/2.jpg",
+  "photos/clocks/3.jpg",
+  "photos/clocks/4.jpg",
+  "photos/clocks/5.jpg",
+  "photos/clocks/6.jpg"
+ ],
+ "pendulum": [
+  "photos/pendulum/1.jpg",
+  "photos/pendulum/2.jpg",
+  "photos/pendulum/3.jpg",
+  "photos/pendulum/4.jpg",
+  "photos/pendulum/5.jpg",
+  "photos/pendulum/6.jpg"
+ ],
+ "moto": [
+  "photos/moto/1.jpg",
+  "photos/moto/2.jpg",
+  "photos/moto/3.jpg",
+  "photos/moto/4.jpg",
+  "photos/moto/5.jpg",
+  "photos/moto/6.jpg"
+ ],
+ "bike": [
+  "photos/bike/1.jpg",
+  "photos/bike/2.jpg",
+  "photos/bike/3.jpg",
+  "photos/bike/4.jpg",
+  "photos/bike/5.jpg",
+  "photos/bike/6.jpg"
+ ],
+ "jar": [
+  "photos/jar/1.jpg",
+  "photos/jar/2.jpg",
+  "photos/jar/3.jpg",
+  "photos/jar/4.jpg",
+  "photos/jar/5.jpg",
+  "photos/jar/6.jpg"
+ ],
+ "wood": [
+  "photos/wood/1.jpg",
+  "photos/wood/2.jpg",
+  "photos/wood/3.jpg",
+  "photos/wood/4.jpg",
+  "photos/wood/5.jpg",
+  "photos/wood/6.jpg"
+ ],
+ "portrait": [],
+ "feature": [],
+ "gallery": []
+}

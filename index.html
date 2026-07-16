@@ -1605,13 +1605,53 @@ function buildRail(cat){
   refreshGalleryAria();
 }
 let railsStarted = false;
-function startRailDiscovery(){
+async function startRailDiscovery(){
   if(railsStarted) return;
   railsStarted = true;
+  let mf = null;
+  try{
+    const r = await fetch("photos/manifest.json", {cache:"no-store"});
+    if(r.ok) mf = await r.json();
+  }catch(e){}
   RAIL_CATS.forEach(cat=>{
-    discoverCat(cat).then(urls=>{
-      if(urls.length){ railPhotos[cat.key] = urls; buildRail(cat); }
-    });
+    const list = mf && Array.isArray(mf[cat.key]) ? mf[cat.key] : [];
+    if(list.length){
+      railPhotos[cat.key] = list.map(p=>encodeURI(p));
+      buildRail(cat);
+    }else{
+      /* 无清单时回退：按 1.jpg、2.jpg… 连续编号探测 */
+      discoverCat(cat).then(urls=>{
+        if(urls.length){ railPhotos[cat.key] = urls; buildRail(cat); }
+      });
+    }
+  });
+  applyFolderPhotos(mf);
+}
+/* 专用文件夹：portrait(肖像) / feature(三个全屏展位) / gallery(珍品掠影) */
+function applyFolderPhotos(mf){
+  if(!mf) return;
+  const setImg = (holder, src, emptyHost, alt)=>{
+    if(!holder || !src) return;
+    let img = holder.querySelector("img");
+    if(!img){
+      img = document.createElement("img");
+      img.loading = "lazy"; img.decoding = "async";
+      holder.prepend(img);
+    }
+    img.src = encodeURI(src);
+    img.alt = alt || "";
+    if(emptyHost) emptyHost.classList.remove("empty");
+  };
+  const d = I18N[curLang] || I18N.vi;
+  const frame = document.querySelector(".portrait .frame-in");
+  if(frame && mf.portrait && mf.portrait[0]){
+    setImg(frame, mf.portrait[0], frame.closest(".portrait"), d["portrait.alt"]);
+  }
+  document.querySelectorAll(".chapter").forEach((ch, i)=>{
+    if(mf.feature && mf.feature[i]) setImg(ch.querySelector(".ch-zoom"), mf.feature[i], ch);
+  });
+  document.querySelectorAll(".g-item").forEach((g, i)=>{
+    if(mf.gallery && mf.gallery[i]) setImg(g, mf.gallery[i], g);
   });
 }
 const railIO = new IntersectionObserver(es=>{

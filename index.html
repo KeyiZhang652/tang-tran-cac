@@ -257,11 +257,12 @@
     color:rgba(201,162,92,.09);user-select:none;transition:color .45s;
   }
   .cat:hover .num{color:rgba(201,162,92,.16)}
-  .cat-ico{width:74px;height:74px;color:var(--brass);margin-bottom:24px;transition:color .4s}
+  .cat-head{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+  .cat-ico{width:46px;height:46px;flex-shrink:0;color:var(--brass);transition:color .4s}
   .cat:hover .cat-ico{color:var(--brass-bright)}
-  .cat h3{font-family:var(--serif);font-size:clamp(24px,2.4vw,30px);font-weight:600;color:var(--parchment);margin-bottom:12px}
+  .cat h3{font-family:var(--serif);font-size:clamp(22px,2.2vw,27px);font-weight:600;color:var(--parchment);line-height:1.2}
   html[data-lang="zh"] .cat h3{font-family:"Songti SC","STSong","SimSun",serif}
-  .cat p{color:var(--parchment-dim);font-size:15px;margin-bottom:20px;max-width:420px}
+  .cat p{color:var(--parchment-dim);font-size:14px;line-height:1.7;margin-bottom:16px;max-width:460px}
   .cat .meta{
     font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--brass);
     border-top:1px solid var(--hairline);padding-top:14px;display:block;
@@ -354,7 +355,7 @@
   }
   .rail::-webkit-scrollbar{display:none}
   .rail-item{
-    flex:0 0 66%;max-width:340px;aspect-ratio:4/3;margin:0;
+    flex:0 0 80%;max-width:440px;aspect-ratio:4/3;margin:0;
     scroll-snap-align:start;overflow:hidden;position:relative;
     border:1px solid var(--hairline);background:var(--ink-2);cursor:zoom-in;
   }
@@ -546,6 +547,10 @@
     .gal{grid-template-columns:1fr}
     .channels{grid-template-columns:1fr}
     .header-in{gap:12px}
+    .cat{padding:26px 18px}
+    .cat-head{gap:13px}
+    .cat-ico{width:40px;height:40px}
+    .rail-item{flex:0 0 86%}
     .langs{margin-left:auto}
     .stats{flex-wrap:wrap;gap:22px}
     .brand-txt{display:none}
@@ -668,7 +673,8 @@
 
         <article class="cat reveal">
           <span class="num">I</span>
-          <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <div class="cat-head">
+            <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <rect x="28" y="10" width="64" height="62" rx="10"/>
             <circle cx="60" cy="41" r="21"/>
             <line x1="60" y1="24" x2="60" y2="28"/><line x1="77" y1="41" x2="73" y2="41"/>
@@ -679,7 +685,8 @@
             <line x1="60" y1="72" x2="60" y2="85"/>
             <circle cx="60" cy="90" r="6"/>
           </svg>
-          <h3 data-i18n="c1.name"></h3>
+            <h3 data-i18n="c1.name"></h3>
+          </div>
           <p data-i18n="c1.desc"></p>
           <span class="meta" data-i18n="c1.meta"></span>
           <div class="rail-wrap" hidden>
@@ -690,7 +697,8 @@
 
         <article class="cat reveal d1">
           <span class="num">II</span>
-          <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <div class="cat-head">
+            <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <circle cx="30" cy="86" r="17"/><circle cx="30" cy="86" r="3"/>
             <circle cx="92" cy="86" r="17"/><circle cx="92" cy="86" r="3"/>
             <line x1="92" y1="86" x2="80" y2="48"/>
@@ -704,7 +712,8 @@
             <line x1="66" y1="70" x2="80" y2="48"/>
             <path d="M58 84 Q74 90 90 82" stroke-width="1.5"/>
           </svg>
-          <h3 data-i18n="c2.name"></h3>
+            <h3 data-i18n="c2.name"></h3>
+          </div>
           <p data-i18n="c2.desc"></p>
           <span class="meta" data-i18n="c2.meta"></span>
           <div class="rail-wrap" hidden>
@@ -715,7 +724,8 @@
 
         <article class="cat reveal">
           <span class="num">III</span>
-          <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <div class="cat-head">
+            <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <circle cx="30" cy="82" r="19"/><circle cx="30" cy="82" r="2.5"/>
             <line x1="30" y1="64" x2="30" y2="100" stroke-width="1"/><line x1="12" y1="82" x2="48" y2="82" stroke-width="1"/>
             <circle cx="90" cy="82" r="19"/><circle cx="90" cy="82" r="2.5"/>
@@ -729,7 +739,8 @@
             <line x1="79" y1="46" x2="81" y2="38"/><path d="M76 38 Q83 34 87 40"/>
             <line x1="57" y1="82" x2="64" y2="90"/>
           </svg>
-          <h3 data-i18n="c3.name"></h3>
+            <h3 data-i18n="c3.name"></h3>
+          </div>
           <p data-i18n="c3.desc"></p>
           <span class="meta" data-i18n="c3.meta"></span>
           <div class="rail-wrap" hidden>
@@ -740,7 +751,8 @@
 
         <article class="cat reveal d1">
           <span class="num">IV</span>
-          <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <div class="cat-head">
+            <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <path d="M28 54 C28 22 92 22 92 54"/>
             <circle cx="27" cy="57" r="4"/><circle cx="93" cy="57" r="4"/>
             <line x1="60" y1="30" x2="60" y2="62"/>
@@ -750,7 +762,8 @@
             <line x1="85" y1="71" x2="87" y2="102"/>
             <line x1="33" y1="92" x2="87" y2="92" stroke-width="1.4"/>
           </svg>
-          <h3 data-i18n="c4.name"></h3>
+            <h3 data-i18n="c4.name"></h3>
+          </div>
           <p data-i18n="c4.desc"></p>
           <span class="meta" data-i18n="c4.meta"></span>
           <div class="rail-wrap" hidden>
@@ -761,7 +774,8 @@
 
         <article class="cat reveal">
           <span class="num">V</span>
-          <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <div class="cat-head">
+            <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <rect x="30" y="14" width="60" height="92" rx="7"/>
             <circle cx="60" cy="74" r="20"/>
             <circle cx="60" cy="74" r="8"/>
@@ -769,7 +783,8 @@
             <circle cx="43" cy="33" r="2.4" fill="currentColor"/>
             <circle cx="77" cy="33" r="2.4" fill="currentColor"/>
           </svg>
-          <h3 data-i18n="c5.name"></h3>
+            <h3 data-i18n="c5.name"></h3>
+          </div>
           <p data-i18n="c5.desc"></p>
           <span class="meta" data-i18n="c5.meta"></span>
           <div class="rail-wrap" hidden>
@@ -780,13 +795,15 @@
 
         <article class="cat reveal d1">
           <span class="num">VI</span>
-          <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <div class="cat-head">
+            <svg class="cat-ico" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <ellipse cx="60" cy="26" rx="24" ry="7"/>
             <path d="M36 26 C30 40 22 50 22 68 C22 92 38 106 60 106 C82 106 98 92 98 68 C98 50 90 40 84 26"/>
             <path d="M34 62 Q42 55 50 62 T66 62 T82 62" stroke-width="1.4"/>
             <path d="M36 74 Q44 67 52 74 T68 74 T84 74" stroke-width="1.4"/>
           </svg>
-          <h3 data-i18n="c6.name"></h3>
+            <h3 data-i18n="c6.name"></h3>
+          </div>
           <p data-i18n="c6.desc"></p>
           <span class="meta" data-i18n="c6.meta"></span>
           <div class="rail-wrap" hidden>
@@ -992,25 +1009,15 @@
         </div>
       </div>
       <div class="channels reveal d1">
-        <a class="chan" href="https://zalo.me/84900000000" target="_blank" rel="noopener">
+        <a class="chan" href="https://zalo.me/84973305632" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           <div class="cl">Zalo</div>
-          <div class="cv">+84 90 000 0000</div>
+          <div class="cv">+84 97 330 56 32</div>
         </a>
-        <a class="chan" href="tel:+84900000000">
+        <a class="chan" href="tel:+84973305632">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <div class="cl" data-i18n="ct.phone"></div>
-          <div class="cv">+84 90 000 0000</div>
-        </a>
-        <a class="chan" href="mailto:suutap.thoigian@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-          <div class="cl">Email</div>
-          <div class="cv">suutap.thoigian@gmail.com</div>
-        </a>
-        <a class="chan" href="https://facebook.com" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          <div class="cl">Facebook</div>
-          <div class="cv">fb.com/tangtrancac</div>
+          <div class="cv">+84 97 330 56 32</div>
         </a>
       </div>
     </div>
@@ -1118,7 +1125,7 @@ const I18N = {
     "ct.text":"Nếu bạn cũng say mê tiếng tích tắc của đồng hồ xưa, tiếng máy nổ của xe cổ, hay ánh xà cừ lấp lánh trên mặt gỗ khảm trai — hãy ghé chơi, uống một chén trà, cùng trò chuyện về những điều đẹp đẽ mà thời gian để lại. Trao đổi, chia sẻ kinh nghiệm, hoặc đơn giản là làm quen một người bạn cùng sở thích.",
     "ct.phone":"Điện thoại",
     "ct.visit":"Đón khách",
-    "ct.visitv":"Việt Nam — xin hẹn trước khi ghé thăm",
+    "ct.visitv":"Xóm Đoàn Kết, thôn Đàn Viên, xã Bình Minh, TP Hà Nội — xin hẹn trước khi ghé thăm",
     "foot":"© 2026 Tàng Trân Các · Bộ sưu tập tư nhân — Gìn giữ thời gian."
   },
   zh: {
@@ -1194,7 +1201,7 @@ const I18N = {
     "ct.text":"若你也痴迷老钟表的滴答、老摩托车的引擎声，或红木上流转的螺钿光泽——欢迎来访，喝一杯茶，聊聊时间留下的那些美好物件。交流鉴赏、切磋心得，或只是认识一位同好，都好。",
     "ct.phone":"电话",
     "ct.visit":"来访",
-    "ct.visitv":"越南——来访请提前预约",
+    "ct.visitv":"Xóm Đoàn Kết, thôn Đàn Viên, xã Bình Minh, TP Hà Nội——来访请提前预约",
     "foot":"© 2026 藏珍阁 · 私人收藏——为时间守物。"
   },
   en: {
@@ -1270,7 +1277,7 @@ const I18N = {
     "ct.text":"If you too are moved by the tick of an old clock, the rumble of a vintage engine, or the shimmer of nacre across inlaid rosewood — come by for a cup of tea and a long conversation about the beautiful things time leaves behind. Compare notes, share knowledge, or simply make a friend.",
     "ct.phone":"Phone",
     "ct.visit":"Visits",
-    "ct.visitv":"Vietnam — by appointment",
+    "ct.visitv":"Xóm Đoàn Kết, thôn Đàn Viên, xã Bình Minh, TP Hà Nội — by appointment",
     "foot":"© 2026 Tàng Trân Các · A private collection — keeping time."
   },
   fr: {
@@ -1346,7 +1353,7 @@ const I18N = {
     "ct.text":"Si vous êtes, vous aussi, ému par le tic-tac d'une vieille horloge, le grondement d'un moteur d'époque ou l'éclat de la nacre sur le bois incrusté, passez prendre le thé et parler longuement des belles choses que le temps nous laisse. Échanger, partager, ou simplement se faire un ami.",
     "ct.phone":"Téléphone",
     "ct.visit":"Visites",
-    "ct.visitv":"Vietnam — sur rendez-vous",
+    "ct.visitv":"Xóm Đoàn Kết, thôn Đàn Viên, xã Bình Minh, TP Hà Nội — sur rendez-vous",
     "foot":"© 2026 Tàng Trân Các · Collection privée — gardiens du temps."
   }
 };

@@ -24,7 +24,7 @@
     --sans:"Be Vietnam Pro","PingFang SC","Microsoft YaHei",sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
   body{
     background:var(--ink);
     color:var(--parchment);
@@ -64,13 +64,21 @@
     border-bottom:1px solid transparent;
   }
   header.scrolled{
-    background:rgba(23,16,9,.82);
+    background:rgba(23,16,9,.92);
     backdrop-filter:blur(14px);
     -webkit-backdrop-filter:blur(14px);
     border-bottom-color:var(--hairline);
   }
+  /* WeChat / older webviews lack backdrop-filter — use a near-solid bg so content doesn't bleed through */
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+    header.scrolled{background:rgba(20,14,8,.98)}
+  }
   .header-in{
-    max-width:1320px;margin:0 auto;padding:14px clamp(16px,3vw,40px);
+    max-width:1320px;margin:0 auto;
+    padding:14px clamp(16px,3vw,40px);
+    padding-left:max(clamp(16px,3vw,40px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,3vw,40px),env(safe-area-inset-right));
+    padding-top:max(14px,env(safe-area-inset-top));
     display:flex;align-items:center;gap:28px;
   }
   .brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
@@ -537,10 +545,11 @@
   @media (max-width:560px){
     .gal{grid-template-columns:1fr}
     .channels{grid-template-columns:1fr}
+    .header-in{gap:12px}
     .langs{margin-left:auto}
     .stats{flex-wrap:wrap;gap:22px}
     .brand-txt{display:none}
-    .lang-btn{padding:7px 11px}
+    .lang-btn{padding:7px 10px;font-size:10.5px;letter-spacing:.04em}
     .music-btn{right:16px;bottom:16px;width:44px;height:44px}
   }
 </style>
